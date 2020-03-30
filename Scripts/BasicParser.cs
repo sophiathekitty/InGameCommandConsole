@@ -19,6 +19,15 @@ public class BasicParser : CommandParser
     {
         string[] args = command.Split(' ');
         string cmd = args[0].ToLower();
+        string arguments = "";
+        if(args.Length > 1)
+        {
+            arguments = args[1];
+            for (int i = 2; i < args.Length; i++)
+            {
+                arguments += " " + args[i];
+            }
+        }
         bool valid = false;
         if (cmd.StartsWith("help"))
         {
@@ -27,25 +36,25 @@ public class BasicParser : CommandParser
         }
         if (cmd.StartsWith("quit"))
         {
-            commandLog.AddMessage("Exiting game", "<b><i>" + cmd + "</b>");
+            commandLog.AddMessage("Exiting game", "<#0000ff><b><i>" + cmd + "</i></b></color> " + arguments);
             StartCoroutine("Quit");
             valid = true;
         }
         if (cmd.StartsWith("reload"))
         {
-            commandLog.AddMessage("Reloading current scene", "<b><i>" + cmd + "</b>");
+            commandLog.AddMessage("Reloading current scene", "<#0000ff><b><i>" + cmd + "</i></b></color> " + arguments);
             StartCoroutine("Reload");
             valid = true;
         }
         if (cmd.StartsWith("ping"))
         {
-            commandLog.AddMessage("pong", "<b><i>" + cmd + "</b>");
+            commandLog.AddMessage("pong", "<#00ff00><b><i>" + cmd + "</i></b></color> " + arguments);
             Reload();
             valid = true;
         }
         if (!valid)
         {
-            commandLog.AddMessage("Unkown Response", command);
+            commandLog.AddMessage("<#ff0000><i>Error</i></color> : Unkown Command. type 'help' for list of commands.", "<#ff0000><i>"+cmd+ "</i></color> " + arguments);
         }
     }
 
