@@ -31,7 +31,21 @@ public class BasicParser : CommandParser
         bool valid = false;
         if (cmd.StartsWith("help"))
         {
-            Help();
+            foreach (MessageDisplay msg in commandLog.messages)
+                msg.life_time = 0;
+            commandLog.AddMessage("clears command log", "<#0f0><b><i>cls</i></b></color>");
+            commandLog.AddMessage("shows this list", "<#0f0><b><i>help</i></b></color>");
+            commandLog.AddMessage("pong", "<#0f0><b><i>ping</i></b></color>");
+            commandLog.AddMessage("reloads current scene", "<#00f><b><i>reload</i></b></color>");
+            commandLog.AddMessage("shuts down the game", "<#00f><b><i>quit</i></b></color>");
+
+            //commandLog.AddMessage(help_txt, "<#0000ff><b><i>" + cmd + "</i></b></color> " + arguments, helpTemplate);
+            valid = true;
+        }
+        if (cmd.StartsWith("cls"))
+        {
+            foreach(MessageDisplay msg in commandLog.messages)
+                msg.life_time = 0;
             valid = true;
         }
         if (cmd.StartsWith("quit"))
@@ -70,8 +84,4 @@ public class BasicParser : CommandParser
         Application.Quit();
     }
 
-    void Help()
-    {
-
-    }
 }
