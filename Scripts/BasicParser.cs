@@ -33,11 +33,12 @@ public class BasicParser : CommandParser
         {
             foreach (MessageDisplay msg in commandLog.messages)
                 msg.life_time = 0;
-            commandLog.AddMessage("clears command log", "<#0f0><b><i>cls</i></b></color>");
-            commandLog.AddMessage("shows this list", "<#0f0><b><i>help</i></b></color>");
-            commandLog.AddMessage("pong", "<#0f0><b><i>ping</i></b></color>");
-            commandLog.AddMessage("reloads current scene", "<#00f><b><i>reload</i></b></color>");
-            commandLog.AddMessage("shuts down the game", "<#00f><b><i>quit</i></b></color>");
+            string help_txt = "<#0f0><b><i>cls</i></b></color>		clears command log\n";
+            help_txt += "<#0f0><b><i>help</i></b></color>		shows this list\n";
+            help_txt += "<#0f0><b><i>ping</i></b></color>		pong\n";
+            help_txt += "<#00f><b><i>reload</i></b></color>	reloads current scene\n";
+            help_txt += "<#00f><b><i>exit</i></b></color>		shut down game";
+            commandLog.AddMessage(help_txt, "<#0f0><b><i>help</i></b></color> " + arguments);
 
             //commandLog.AddMessage(help_txt, "<#0000ff><b><i>" + cmd + "</i></b></color> " + arguments, helpTemplate);
             valid = true;
